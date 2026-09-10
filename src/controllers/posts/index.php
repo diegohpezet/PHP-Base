@@ -2,13 +2,22 @@
 require_once __DIR__ . '/../../config/bootstrap.php';
 
 try {
-    $stmt = $pdo->prepare('SELECT * FROM posts');
+    $query = '
+        SELECT
+            p.*,
+            u.id AS user_id,
+            u.name AS user_name
+        FROM posts p
+        JOIN users u ON p.user_id = u.id
+        ORDER BY created_at DESC
+    ';
+
+    $stmt = $pdo->prepare($query);
     $stmt->execute();
 
-    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    header('Location: /src/views/posts/index.php');
-    exit;
+    require_once __DIR__ . '/../../views/posts/index.php';
 } catch (PDOException $e) {
-    exit;
+    exit('Error al consultar los posts');
 }

@@ -7,8 +7,8 @@ try {
         'id' => $_GET['id'],
     ]);
 
-    header('Location: /src/views/posts/index.php');
+    header('Location: /src/controllers/posts/index.php');
     exit;
 } catch (PDOException $e) {
-    exit;
+    exit('Error al eliminar el post');
 }
