@@ -8,7 +8,7 @@ include(__DIR__ . '/../_layouts/layout.php');
     <p>Aquí puedes ver todos los posts publicados</p>
   </div>
   <div class="col d-flex justify-content-end align-items-center">
-    <a class="btn btn-primary" href="/src/views/posts/create.php">Crear Post</a>
+    <a class="btn btn-primary" href="/src/controllers/posts/form.php">Crear Post</a>
   </div>
 </header>
 
@@ -25,7 +25,7 @@ include(__DIR__ . '/../_layouts/layout.php');
           <p class="card-text"><strong>By:</strong> <?= $post['user_name'] ?></p>
           
           <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] === $post['user_id']): ?>
-            <a class="btn btn-secondary me-3" href="/src/views/posts/update.php?id=<?= $post['id'] ?>">Editar</a>
+            <a class="btn btn-secondary me-3" href="/src/controllers/posts/form.php?id=<?= $post['id'] ?>">Editar</a>
             <a class="btn btn-danger" href="/src/controllers/posts/delete.php?id=<?= $post['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este post?');">Eliminar</a>
           <?php endif; ?>
         </div>
